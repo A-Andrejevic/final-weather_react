@@ -31,7 +31,7 @@ body {
   margin-top: 70px;
   margin-bottom: 30px;
   color: var(--primary-color);
-  font-size: 48px;
+  font-size: 53px;
 }
 
 form {
@@ -91,7 +91,12 @@ li {
   padding: 5px;
 }
 
-button:hover {
+#location-button:hover {
   background-color: var(--secondary-color);
-  color: var(--tertiary-color);
+  color: white;
+}
+
+#search-button:hover {
+  background-color: var(--secondary-color);
+  color: white;
 }

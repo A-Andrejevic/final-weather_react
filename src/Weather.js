@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
+import FormattedDate from "./FormattedDate";
 
 export default function Weather() {
   let [city, setCity] = useState(null);
@@ -12,30 +13,25 @@ export default function Weather() {
   let [icon, setIcon] = useState(null);
   let [feeling, setFeeling] = useState(null);
 
-window.onload = (event) => {
-  city = "Stockholm";
-  setLocation(`${city}`);
-  let apiKey = "745e466f4597986491c458e2888a3c22";
-  let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  window.onload = (event) => {
+    city = "Stockholm";
+    setLocation(`${city}`);
+    let apiKey = "745e466f4597986491c458e2888a3c22";
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
-
-  function defaultCity(response)
-  
-  {
+    function defaultCity(response) {
       setTemperature(Math.round(response.data.main.temp));
       setDescription(response.data.weather[0].description);
       setWind(response.data.wind.speed);
       setFeeling(Math.round(response.data.main.feels_like));
       setHumidity(response.data.main.humidity);
+
       setIcon(
         `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
       );
-    
-
-  }
-  axios.get(url).then(defaultCity);
-};
-
+    }
+    axios.get(url).then(defaultCity);
+  };
 
   function submitCity(event) {
     event.preventDefault();
@@ -78,7 +74,9 @@ window.onload = (event) => {
 
         <h1>{location}</h1>
         <ul>
-          <li>Time</li>
+          <li>
+            <FormattedDate />
+          </li>
           <li className="text-capitalize">{description}</li>
         </ul>
         <div className="row">
@@ -102,6 +100,3 @@ window.onload = (event) => {
     </div>
   );
 }
-
-
-
