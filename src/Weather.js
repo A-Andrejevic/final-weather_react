@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
 import FormattedDate from "./FormattedDate";
+import TemperatureCF from "./TemperatureCF";
 
 export default function Weather() {
   let [city, setCity] = useState(null);
@@ -84,8 +85,7 @@ export default function Weather() {
             <div className="clearfix float-left current-weather">
               <img src={icon} alt={description} />
 
-              <span className="current-temperature">{temperature}</span>
-              <span className="unit">°C</span>
+              <TemperatureCF celsius={temperature} />
             </div>
           </div>
           <div className="col-6">
