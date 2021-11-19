@@ -4,7 +4,16 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <h1>Weather</h1>
+      <footer>
+        <a
+          href="https://github.com/A-Andrejevic/final-weather_react"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Open-source code
+        </a>{" "}
+        by Aleksandra Andrejevic
+      </footer>
     </div>
   );
 }
