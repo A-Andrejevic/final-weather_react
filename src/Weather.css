@@ -1,6 +1,6 @@
 :root {
   --primary-color: #cc0e74;
-  --secondary-color: #0f04a5;
+  --secondary-color: #382e6b;
   --tertiary-color: #f7f0e69a;
 }
 
@@ -60,7 +60,8 @@ li {
 
 .unit,
 .current-temperature {
-  font-size: 35px;
+  font-size: 40px;
+  color: var(--secondary-color);
 }
 
 #query-box {
