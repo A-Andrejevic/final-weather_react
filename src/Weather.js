@@ -3,6 +3,7 @@ import "./Weather.css";
 import axios from "axios";
 import FormattedDate from "./FormattedDate";
 import TemperatureCF from "./TemperatureCF";
+import Forecast from "./Forecast";
 
 export default function Weather() {
   let [city, setCity] = useState(null);
@@ -13,6 +14,8 @@ export default function Weather() {
   let [wind, setWind] = useState(null);
   let [icon, setIcon] = useState(null);
   let [feeling, setFeeling] = useState(null);
+  let [longitude, setLongitude] = useState(null);
+  let [latitude, setLatitude] = useState(null);
 
   window.onload = (event) => {
     city = "Stockholm";
@@ -26,7 +29,8 @@ export default function Weather() {
       setWind(response.data.wind.speed);
       setFeeling(Math.round(response.data.main.feels_like));
       setHumidity(response.data.main.humidity);
-
+      setLongitude(response.data.coord.lon);
+      setLatitude(response.data.coord.lat);
       setIcon(
         `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
       );
@@ -49,6 +53,9 @@ export default function Weather() {
       setFeeling(Math.round(response.data.main.feels_like));
       setWind(response.data.wind.speed);
       setHumidity(response.data.main.humidity);
+      setLongitude(response.data.coord.lon);
+      setLatitude(response.data.coord.lat);
+      console.log(response.data);
       setIcon(
         `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
       );
@@ -96,6 +103,7 @@ export default function Weather() {
             </ul>
           </div>
         </div>
+        <Forecast latitude={latitude} longitude={longitude} />
       </div>
     </div>
   );
