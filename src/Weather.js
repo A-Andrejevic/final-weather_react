@@ -103,7 +103,7 @@ export default function Weather() {
             </ul>
           </div>
         </div>
-        <Forecast latitude={latitude} longitude={longitude} day={time}/>
+        <Forecast latitude={latitude} longitude={longitude} />
       </div>
     </div>
   );
