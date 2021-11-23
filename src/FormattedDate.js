@@ -19,7 +19,10 @@ export default function FormattedDate(props) {
   minutes = minutes > 9 ? minutes : "0" + minutes;
   return (
     <div className="FormattedDate">
-      Last updated: {day} {hours}:{minutes}
+      <em>
+        {" "}
+        Last updated: {day} {hours}:{minutes}{" "}
+      </em>
     </div>
   );
 }

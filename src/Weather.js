@@ -89,10 +89,10 @@ export default function Weather() {
         </ul>
         <div className="row">
           <div className="col-6">
-            <div className="clearfix float-left current-weather">
-              <WeatherIcon icon={icon} alt={description}/>
-
-              <TemperatureCF celsius={temperature} />
+            <div className="clearfix d-flex justify-content-start">
+              <WeatherIcon icon={icon} alt={description} />
+                <TemperatureCF celsius={temperature} />
+            
             </div>
           </div>
           <div className="col-6">

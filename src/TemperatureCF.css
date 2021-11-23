@@ -4,16 +4,27 @@
   --tertiary-color: #f7f0e69a;
 }
 
-.unit a {
-  margin-left: 5px;
-  font-size: 25px;
-  color: var(--secondary-color);
-}
-.current-temperature {
-  font-size: 60px;
+.TemperatureCF {
+  padding: 0;
+  float: left;
+  margin-left: 10px;
 }
 
-a {
+.unit a {
+  margin-left: 1px;
+
+  font-size: 20px;
+  color: var(--primary-color);
   text-decoration: none;
-  color: var(--secondary-color);
+ 
+}
+
+.TemperatureCF .unit {
+  position: fixed;
+  margin-top: 25px;
+}
+.current-temperature {
+  font-size: 85px;
+  padding: 0;
+  color: var(--primary-color);
 }

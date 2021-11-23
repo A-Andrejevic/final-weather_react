@@ -6,14 +6,15 @@
 
 body {
   font-family: "Source Code Pro", monospace;
-  background-image: url(https://s3.amazonaws.com/shecodesio-production/uploads/files/000/021/289/original/bg-image-large.jpg?1637314035);
-  position: fixed;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  min-height: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
+
+
+}
+
+canvas {
+  height: 50px;
+  width: 50px;
+  margin-top: 20px;
+  margin-bottom: 15px;
 }
 
 .Weather .container {
@@ -51,18 +52,11 @@ li {
   font-size: 18px;
 }
 
-.current-weather img {
-  float: left;
-  width: 90px;
-  height: 90px;
-  margin-left: 20px;
-}
-
 #query-box {
   background-color: var(--secondary-color);
   border: solid;
   border-radius: 15px;
-  border-color: var(--tertiary-color);
+  border-color: var(--primary-color);
   text-align: center;
   padding: 7px;
   color: white;
@@ -70,7 +64,7 @@ li {
 
 #search-button {
   border: solid;
-  border-color: var(--secondary-color);
+  border-color: var(--primary-color);
   background-color: transparent;
   border-radius: 15px;
   margin-left: 10px;
@@ -79,7 +73,7 @@ li {
 
 #location-button {
   border: solid;
-  border-color: var(--secondary-color);
+  border-color: var(--primary-color);
   background-color: transparent;
   border-radius: 15px;
   margin-left: 20px;

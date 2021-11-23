@@ -31,7 +31,7 @@ export default function TemperatureCF(props) {
   } else {
     let fahrenheitTemperature = Math.round((props.celsius * 9) / 5) + 32;
     return (
-      <div className="TemperatureCF">
+      <div className="TemperatureCF ">
         <span className="current-temperature">{fahrenheitTemperature}</span>
         <span className="unit">
           <a href="/" onClick={convertToCelsius}>
