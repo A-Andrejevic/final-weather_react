@@ -33,7 +33,7 @@ export default function Weather() {
       setHumidity(response.data.main.humidity);
       setLongitude(response.data.coord.lon);
       setLatitude(response.data.coord.lat);
-      setTime(new Date(response.data.dt * 1000));
+      setTime(response.data.dt * 1000);
       setIcon(response.data.weather[0].icon);
     }
     axios.get(url).then(defaultCity);
@@ -56,7 +56,7 @@ export default function Weather() {
       setHumidity(response.data.main.humidity);
       setLongitude(response.data.coord.lon);
       setLatitude(response.data.coord.lat);
-      setTime(new Date(response.data.dt * 1000));
+      setTime(response.data.dt * 1000);
 
       setIcon(response.data.weather[0].icon);
     }
