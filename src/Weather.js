@@ -4,6 +4,7 @@ import axios from "axios";
 import FormattedDate from "./FormattedDate";
 import TemperatureCF from "./TemperatureCF";
 import Forecast from "./Forecast";
+import WeatherIcon from "./WeatherIcon";
 
 export default function Weather() {
   let [city, setCity] = useState(null);
@@ -33,9 +34,7 @@ export default function Weather() {
       setLongitude(response.data.coord.lon);
       setLatitude(response.data.coord.lat);
       setTime(new Date(response.data.dt * 1000));
-      setIcon(
-        `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-      );
+      setIcon(response.data.weather[0].icon);
     }
     axios.get(url).then(defaultCity);
   };
@@ -57,10 +56,9 @@ export default function Weather() {
       setHumidity(response.data.main.humidity);
       setLongitude(response.data.coord.lon);
       setLatitude(response.data.coord.lat);
-      console.log(response.data);
-      setIcon(
-        `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-      );
+      setTime(new Date(response.data.dt * 1000));
+
+      setIcon(response.data.weather[0].icon);
     }
   }
 
@@ -92,7 +90,7 @@ export default function Weather() {
         <div className="row">
           <div className="col-6">
             <div className="clearfix float-left current-weather">
-              <img src={icon} alt={description} />
+              <WeatherIcon icon={icon} alt={description}/>
 
               <TemperatureCF celsius={temperature} />
             </div>
