@@ -16,6 +16,7 @@ export default function Weather() {
   let [feeling, setFeeling] = useState(null);
   let [longitude, setLongitude] = useState(null);
   let [latitude, setLatitude] = useState(null);
+  let [time, setTime] = useState(null);
 
   window.onload = (event) => {
     city = "Stockholm";
@@ -31,6 +32,7 @@ export default function Weather() {
       setHumidity(response.data.main.humidity);
       setLongitude(response.data.coord.lon);
       setLatitude(response.data.coord.lat);
+      setTime(new Date(response.data.dt * 1000));
       setIcon(
         `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
       );
@@ -83,7 +85,7 @@ export default function Weather() {
         <h1>{location}</h1>
         <ul>
           <li>
-            <FormattedDate />
+            <FormattedDate time={time} />
           </li>
           <li className="text-capitalize">{description}</li>
         </ul>
