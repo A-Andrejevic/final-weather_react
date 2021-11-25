@@ -6,12 +6,12 @@
 
 body {
   font-family: "Source Code Pro", monospace;
-background-image: url(https://s3.amazonaws.com/shecodesio-production/uploads/files/000/021/289/original/bg-image-large.jpg?1637314035);
- background-size: cover;
- background-repeat: no-repeat;
-  background-position:  center;
-    width: '100vw';
-      height: '100vh';
+  background-image: url(https://s3.amazonaws.com/shecodesio-production/uploads/files/000/021/289/original/bg-image-large.jpg?1637314035);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 canvas {

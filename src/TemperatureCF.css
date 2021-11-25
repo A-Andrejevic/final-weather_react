@@ -10,21 +10,22 @@
   margin-left: 10px;
 }
 
-.unit a {
+.unit {
   margin-left: 1px;
+  padding: 0;
+  margin-top: -100px;
 
   font-size: 20px;
   color: var(--primary-color);
-  text-decoration: none;
- 
 }
 
-.TemperatureCF .unit {
-  position: fixed;
-  margin-top: 25px;
+.unit a {
+  text-decoration: none;
+  color: var(--primary-color);
 }
+
 .current-temperature {
-  font-size: 85px;
+  font-size: 90px;
   padding: 0;
   color: var(--primary-color);
 }

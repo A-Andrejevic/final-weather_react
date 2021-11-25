@@ -33,7 +33,7 @@ export default function TemperatureCF(props) {
     return (
       <div className="TemperatureCF ">
         <span className="current-temperature">{fahrenheitTemperature}</span>
-        <span className="unit">
+        <div className="unit ">
           <a href="/" onClick={convertToCelsius}>
             °C{" "}
           </a>{" "}
@@ -41,7 +41,7 @@ export default function TemperatureCF(props) {
           <a href="/" onClick={convertToFahrenheit}>
             F
           </a>{" "}
-        </span>
+        </div>
       </div>
     );
   }

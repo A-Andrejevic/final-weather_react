@@ -6,105 +6,91 @@ import TemperatureCF from "./TemperatureCF";
 import Forecast from "./Forecast";
 import WeatherIcon from "./WeatherIcon";
 
-export default function Weather() {
-  let [city, setCity] = useState(null);
-  let [location, setLocation] = useState(null);
-  let [temperature, setTemperature] = useState(null);
-  let [description, setDescription] = useState(null);
-  let [humidity, setHumidity] = useState(null);
-  let [wind, setWind] = useState(null);
-  let [icon, setIcon] = useState(null);
-  let [feeling, setFeeling] = useState(null);
-  let [longitude, setLongitude] = useState(null);
-  let [latitude, setLatitude] = useState(null);
-  let [time, setTime] = useState(null);
+export default function Weather(props) {
+  let [weatherData, setWeatherData] = useState({ ready: false });
+  let [city, setCity] = useState(props.defaultCity);
 
-  window.onload = (event) => {
-    city = "Stockholm";
-    setLocation(`${city}`);
-    let apiKey = "745e466f4597986491c458e2888a3c22";
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-
-    function defaultCity(response) {
-      setTemperature(Math.round(response.data.main.temp));
-      setDescription(response.data.weather[0].description);
-      setWind(response.data.wind.speed);
-      setFeeling(Math.round(response.data.main.feels_like));
-      setHumidity(response.data.main.humidity);
-      setLongitude(response.data.coord.lon);
-      setLatitude(response.data.coord.lat);
-      setTime(response.data.dt * 1000);
-      setIcon(response.data.weather[0].icon);
-    }
-    axios.get(url).then(defaultCity);
-  };
+  function fetchWeatherData(response) {
+    setWeatherData({
+      ready: true,
+      city: response.data.name,
+      temperature: Math.round(response.data.main.temp),
+      description: response.data.weather[0].description,
+      feeling: Math.round(response.data.main.feels_like),
+      wind: response.data.wind.speed,
+      humidity: response.data.main.humidity,
+      icon: response.data.weather[0].icon,
+      longitude: response.data.coord.lon,
+      latitude: response.data.coord.lat,
+      time: response.data.dt * 1000,
+    });
+  }
 
   function submitCity(event) {
     event.preventDefault();
-    setLocation(`${city}`);
+
     let apiKey = "745e466f4597986491c458e2888a3c22";
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
-    axios.get(url).then(showCurrentWeather);
-
-    function showCurrentWeather(response) {
-      setLocation(response.data.name);
-      setTemperature(Math.round(response.data.main.temp));
-      setDescription(response.data.weather[0].description);
-      setFeeling(Math.round(response.data.main.feels_like));
-      setWind(response.data.wind.speed);
-      setHumidity(response.data.main.humidity);
-      setLongitude(response.data.coord.lon);
-      setLatitude(response.data.coord.lat);
-      setTime(response.data.dt * 1000);
-
-      setIcon(response.data.weather[0].icon);
-    }
+    axios.get(url).then(fetchWeatherData);
   }
 
   function inputCity(event) {
     setCity(event.target.value);
   }
 
-  return (
-    <div className="Weather">
-      <div className="container">
-        <form onSubmit={submitCity}>
-          <input
-            type="search"
-            placeholder="Enter location here"
-            id="query-box"
-            onChange={inputCity}
-          />
-          <input type="submit" value="Search" id="search-button" />
-          <button id="location-button">Current location</button>
-        </form>
+  if (weatherData.ready) {
+    return (
+      <div className="Weather">
+        <div className="container">
+          <form onSubmit={submitCity}>
+            <input
+              type="search"
+              placeholder="Enter location here"
+              id="query-box"
+              onChange={inputCity}
+            />
+            <input type="submit" value="Search" id="search-button" />
+            <button id="location-button">Current location</button>
+          </form>
 
-        <h1>{location}</h1>
-        <ul>
-          <li>
-            <FormattedDate time={time} />
-          </li>
-          <li className="text-capitalize">{description}</li>
-        </ul>
-        <div className="row">
-          <div className="col-6">
-            <div className="clearfix d-flex justify-content-start">
-              <WeatherIcon icon={icon} alt={description} />
-                <TemperatureCF celsius={temperature} />
-            
+          <h1>{weatherData.city}</h1>
+          <ul>
+            <li>
+              <FormattedDate time={weatherData.time} />
+            </li>
+            <li className="text-capitalize">{weatherData.description}</li>
+          </ul>
+          <div className="row">
+            <div className="col-6">
+              <div className="clearfix d-flex justify-content-start">
+                <WeatherIcon
+                  icon={weatherData.icon}
+                  alt={weatherData.description}
+                />
+                <TemperatureCF celsius={weatherData.temperature} />
+              </div>
+            </div>
+            <div className="col-6">
+              <ul>
+                <li>Humidity: {weatherData.humidity}%</li>
+                <li>Wind: {weatherData.wind} km/h</li>
+                <li>Feels like: {weatherData.feeling}°C</li>
+              </ul>
             </div>
           </div>
-          <div className="col-6">
-            <ul>
-              <li>Humidity: {humidity}%</li>
-              <li>Wind: {wind} km/h</li>
-              <li>Feels like: {feeling}°C</li>
-            </ul>
-          </div>
+          <Forecast
+            latitude={weatherData.latitude}
+            longitude={weatherData.longitude}
+          />
         </div>
-        <Forecast latitude={latitude} longitude={longitude} />
       </div>
-    </div>
-  );
+    );
+  } else {
+    let apiKey = "745e466f4597986491c458e2888a3c22";
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+
+    axios.get(url).then(fetchWeatherData);
+    return "Weather is loading...";
+  }
 }
